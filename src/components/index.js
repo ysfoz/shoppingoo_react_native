@@ -1,1 +1,5 @@
 export * from "./CostumInput"
+export * from "./Announcement"
+export * from "./Navbar"
+export * from "./Slider"
+export * from "./Categories"
