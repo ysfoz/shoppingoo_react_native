@@ -1,7 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-import { Announcement,Categories,Navbar,Slider } from '../components';
+import { Announcement,Categories,Navbar,Slider,SliderDesc } from '../components';
 
 const Home = () => {
   return (
@@ -11,6 +11,7 @@ const Home = () => {
       <Announcement/>
       <Navbar/>
       <Slider/>
+      <SliderDesc/>
       <Categories/>
     </View>
     </SafeAreaView>
