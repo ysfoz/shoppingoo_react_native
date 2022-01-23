@@ -1,27 +1,20 @@
 import {
   Dimensions,
   Image,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  SafeAreaView
 } from 'react-native';
 import React from 'react';
-
-import {Navbar, Announcement} from '../components';
-
-import {popularProducts} from '../data';
 import cart from '../assets/cart.png';
+import { CartFooter } from '.';
 
-const Product = () => {
+const CartItem = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Navbar />
-      <Announcement />
+    <View style={styles.container}>
       <View style={styles.upContainer}>
-        <Image source={cart} style={styles.img} />
+        <Image source={cart} style={styles.img} /> 
       </View>
 
       <View style={styles.downContainer}>
@@ -35,23 +28,10 @@ const Product = () => {
         <View style={styles.colorContainer}>
           <Text style={styles.title}>Color</Text>
           <View style={styles.color}></View>
-          <View style={styles.color}></View>
-          <View style={styles.color}></View>
-        </View>
-        <View style={styles.colorContainer}>
           <Text style={styles.title}>Size</Text>
-          <View style={styles.sizeContainer}>
-            <TouchableOpacity>
-              <Text style={styles.size}>S</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.size}>L</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.size}>XL</Text>
-            </TouchableOpacity>
-          </View>
+          <Text style={styles.size}>S</Text>
         </View>
+
         <View style={styles.quantityContainer}>
           <TouchableOpacity>
             <Text style={styles.quantityText}>-</Text>
@@ -63,34 +43,35 @@ const Product = () => {
             <Text style={styles.quantityText}>+</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.title}>Add Cart</Text>
-        </TouchableOpacity>
       </View>
-    </SafeAreaView>
+      <CartFooter/>
+    </View>
   );
 };
 
-export {Product};
+export {CartItem};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    backgroundColor:"#fff",
+    // height: Dimensions.get('screen').height * 0.5,
+    margin: 10,
+    padding: 10,
+    // marginBottom:100
   },
   upContainer: {
-    flex: 1,
-
     justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor:"red",
+     height: Dimensions.get('screen').height * 0.3,
   },
   downContainer: {
-    flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    marginLeft: 20,
+    // marginLeft: 20,
   },
   img: {
-    width: Dimensions.get('screen').width * 0.8,
+    width: Dimensions.get('screen').width * 0.5,
     resizeMode: 'contain',
   },
   text: {
@@ -149,15 +130,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     fontWeight: 'bold',
   },
-  button:{
+  button: {
     width: 150,
-    justifyContent:"center",
-    alignItems:"center",
-    alignSelf:"flex-end",
-    marginRight:20,
-    marginVertical:20,
-    backgroundColor:"#80cbc4",
-    borderRadius:4
-    
-  }
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    marginRight: 20,
+    marginVertical: 20,
+    backgroundColor: '#80cbc4',
+    borderRadius: 4,
+  },
 });
