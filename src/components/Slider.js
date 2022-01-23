@@ -15,13 +15,6 @@ import {sliderItems} from '../data';
 
 const Slider = () => {
   return (
-    // id: 1,
-    // img:"https://www.pngarts.com/files/2/Model-PNG-High-Quality-Image.png",
-
-    // title: "SUMMER SALE",
-    // desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-    // bg: "fbf0f4",
-    // cat:"summer"
 
     <ScrollView
       horizontal
@@ -34,7 +27,7 @@ const Slider = () => {
               source={{uri: item.img}}
               style={[styles.img, {backgroundColor: item.bg}]}
             />
-            <Text style={styles.arrow}>--></Text>
+            <Text style={styles.arrow}>→</Text>
             <Text style={styles.title}>{item.title}</Text>
             <TouchableOpacity style={styles.button}>
               <Text>Show More</Text>
