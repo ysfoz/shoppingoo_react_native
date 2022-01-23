@@ -1,10 +1,11 @@
-import { StyleSheet,  Dimensions, TextInput, View } from 'react-native';
+import { StyleSheet,  Dimensions, TextInput, View,Text } from 'react-native';
 import React from 'react';
 
 const CostumInput = (props) => {
   return (
-    <View style={styles.input}>
-      <TextInput placeholder={props.placeholder}/>
+    <View >
+      {props.text && <Text style={styles.text}>{props.text}</Text>}
+      <TextInput placeholder={props.placeholder} value={props.value} style={[styles.input,props.style]}/>
     </View>
   );
 };
@@ -20,4 +21,9 @@ const styles = StyleSheet.create({
         borderRadius:5
         
     },
+    text:{
+      marginBottom:2,
+      opacity:0.3,
+      marginLeft:2,
+    }
 });
