@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View,ScrollView } from 'react-native';
 import React from 'react';
 
 import { Announcement,Categories,Navbar,Slider,SliderDesc } from '../components';
@@ -7,13 +7,13 @@ const Home = () => {
   return (
     <SafeAreaView>
 
-    <View>
+    <ScrollView showsHorizontalScrollIndicator={false}>
       <Announcement/>
       <Navbar/>
-      <Slider/>
       <SliderDesc/>
+      <Slider/>
       <Categories/>
-    </View>
+    </ScrollView>
     </SafeAreaView>
   );
 };
