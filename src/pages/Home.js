@@ -1,4 +1,4 @@
-import {SafeAreaView, StyleSheet, Text, View, ScrollView} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View, ScrollView,Dimensions} from 'react-native';
 import React from 'react';
 
 import {
@@ -8,7 +8,8 @@ import {
   Slider,
   SliderDesc,
   Footer,
-  Newsletter
+  Newsletter,
+  Products
 } from '../components';
 
 const Home = () => {
@@ -23,6 +24,7 @@ const Home = () => {
         <View style={styles.container}>
           <Text style={styles.title}>Most Populer Products</Text>
         </View>
+        <Products/>
         <Newsletter/>
         <Footer/>
 
@@ -36,10 +38,14 @@ export {Home};
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'floralwhite',
+    marginBottom:10,
+    width: Dimensions.get("window").width *0.9,
+    alignSelf:"center"
   },
   title: {
     textAlign: 'center',
     fontSize: 24,
     padding: 10,
+    color: "#80cbc4"
   },
 });
