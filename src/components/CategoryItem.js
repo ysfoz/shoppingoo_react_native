@@ -14,7 +14,7 @@ const CategoryItem = props => {
       <Image source={{uri: props.item.img}} style={styles.img} />
       <View style={styles.wrapper}>
         <Text style={styles.title}>{props.item.title}</Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={()=> props.navigate("productslist",{cat:props?.item?.cat})}>
           <Text>Shop Now</Text>
         </TouchableOpacity>
       </View>

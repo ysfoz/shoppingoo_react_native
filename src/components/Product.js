@@ -16,7 +16,6 @@ const Product = props => {
         <TouchableOpacity>
           <Image source={{uri: props?.product?.img}} style={styles.img} />
         </TouchableOpacity>
-        <Text>{props?.product?.id}</Text>
       </View>
     </View>
   );

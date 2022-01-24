@@ -47,8 +47,8 @@ dispatch(setTokenRedux(token))
         <Announcement />
         <Navbar navigate = {props.navigation.navigate}/>
         <SliderDesc />
-        <Slider />
-        <Categories />
+        <Slider navigate = {props.navigation.navigate}/>
+        <Categories navigate = {props.navigation.navigate}/>
         <View style={styles.container}>
           <Text style={styles.title}>Most Populer Products</Text>
         </View>

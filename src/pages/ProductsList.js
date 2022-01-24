@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, Dimensions, ScrollView} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   FilterItem,
@@ -12,6 +12,13 @@ import {
 
 
 const ProductsList = (props) => {
+  const [cat,setCat] =useState( props?.route?.params?.cat === undefined ? "" : props?.route?.params?.cat)
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("newest");
+  console.log("🚀 ~ file: ProductsList.js ~ line 18 ~ ProductsList ~ sort", sort)
+  console.log("🚀 ~ file: ProductsList.js ~ line 17 ~ ProductsList ~ filters", filters)
+  
+ 
   return (
     <ScrollView>
       <Navbar navigate = {props.navigation.navigate} />
@@ -19,28 +26,28 @@ const ProductsList = (props) => {
       <Text style={styles.title}>Dresses</Text>
       <View style={styles.buttonContainer}>
         <Text style={styles.text}>Sizes</Text>
-        <FilterItem size="XS" />
-        <FilterItem size="S" />
-        <FilterItem size="M" />
-        <FilterItem size="L" />
-        <FilterItem size="XL" />
+        <FilterItem size="XS" value="xs" name="size" setFilters={setFilters}/>
+        <FilterItem size="S" value="s" name="size" setFilters={setFilters}/>
+        <FilterItem size="M" value="m" name="size" setFilters={setFilters}/>
+        <FilterItem size="L" value="l" name="size" setFilters={setFilters}/>
+        <FilterItem size="XL" value="xl" name="size" setFilters={setFilters}/>
       </View>
       <View style={styles.buttonContainer}>
         <Text style={styles.text}>Colors</Text>
-        <FilterItem color="blue" />
-        <FilterItem color="yellow" />
-        <FilterItem color="white" />
-        <FilterItem color="black" />
-        <FilterItem color="green" />
-        <FilterItem color="red" />
+        <FilterItem color="blue" value="blue" name="color" setFilters={setFilters}/>
+        <FilterItem color="yellow" value="yellow" name="color" setFilters={setFilters}/>
+        <FilterItem color="white" value="white" name="color" setFilters={setFilters}/>
+        <FilterItem color="black" value="black" name="color" setFilters={setFilters}/>
+        <FilterItem color="green" value="green" name="color" setFilters={setFilters}/>
+        <FilterItem color="red" value="red" name="color" setFilters={setFilters}/>
       </View>
       <View style={styles.buttonContainer}>
         <Text style={styles.text}>Filters</Text>
-        <FilterItem size="NEW" width />
-        <FilterItem size="Price(asc)" width />
-        <FilterItem size="Price(desc)" width />
+        <FilterItem size="NEW" width value="newest" setSort={setSort}/>
+        <FilterItem size="Price(asc)" width value="asc" setSort={setSort}/>
+        <FilterItem size="Price(desc)" width value="desc" setSort={setSort}/>
       </View>
-      <Products />
+      <Products cat={cat} filters={filters} sort={sort}/>
       <Newsletter />
       <Footer />
     </ScrollView>

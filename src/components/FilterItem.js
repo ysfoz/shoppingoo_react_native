@@ -7,16 +7,20 @@ import {
 } from 'react-native';
 import React from 'react';
 
+
 const FilterItem = props => {
+ 
+ 
   return (
     <>
       <TouchableOpacity
+      onPress={()=> props.setFilters && props.setFilters !== undefined ? props.setFilters((prev) => ({...prev,[props.name]:props.value})) : props.setSort(props.value) }
         style={
           props.width
             ? styles.filterButton
             : [styles.button, {backgroundColor: props.color && props.color}]
         }>
-        <Text style={styles.sizeText}>{props.size}</Text>
+        <Text  style={styles.sizeText}>{props.size}</Text>
       </TouchableOpacity>
     </>
   );

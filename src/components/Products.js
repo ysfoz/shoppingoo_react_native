@@ -17,7 +17,6 @@ export {Products};
 
 const styles = StyleSheet.create({
     container:{
-        // flexWrap:"wrap",
         justifyContent:"center",
         alignItems:"center"
     }
