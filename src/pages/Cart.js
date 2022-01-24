@@ -11,10 +11,10 @@ import React from 'react';
 
 import {Navbar, Announcement,CartItem,Footer,Summery} from '../components';
 
-const Cart = () => {
+const Cart = (props) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Navbar />
+      <Navbar navigate = {props.navigation.navigate} />
       <Announcement />
       <ScrollView>
         <Text style={styles.title}>Your Bag</Text>

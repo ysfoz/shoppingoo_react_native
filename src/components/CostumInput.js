@@ -11,8 +11,7 @@ const CostumInput = props => {
         style={[styles.input, props.style]}
         onChangeText={props.onChangeText}
         onBlur={props.onBlur}
-        
-        
+        secureTextEntry ={props.password}
       />
     </View>
   );

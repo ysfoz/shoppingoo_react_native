@@ -16,7 +16,7 @@ import * as Yup from 'yup';
 import {createUser} from '../helper/requestMethods';
 import {useDispatch} from 'react-redux';
 
-const Register = (props) => {
+const Register = props => {
   const dispatch = useDispatch();
 
   const formik = useFormik({
@@ -39,7 +39,7 @@ const Register = (props) => {
       img: Yup.string(),
     }),
     onSubmit: values => {
-      createUser(dispatch, values).then(props.navigation.navigate("login"))
+      createUser(dispatch, values).then(props.navigation.navigate('login'));
     },
   });
 
@@ -87,7 +87,7 @@ const Register = (props) => {
               onPress={formik.handleSubmit}>
               <Text>Create</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.bottomButton}>
+            <TouchableOpacity style={styles.bottomButton} onPress={()=> props.navigation.navigate("login")}>
               <Text>Sign In</Text>
             </TouchableOpacity>
           </View>

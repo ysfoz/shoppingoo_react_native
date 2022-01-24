@@ -11,10 +11,10 @@ import {
 } from '../components';
 import {popularProducts} from '../data';
 
-const ProductsList = () => {
+const ProductsList = (props) => {
   return (
     <ScrollView>
-      <Navbar />
+      <Navbar navigate = {props.navigation.navigate} />
       <Announcement />
       <Text style={styles.title}>Dresses</Text>
       <View style={styles.buttonContainer}>

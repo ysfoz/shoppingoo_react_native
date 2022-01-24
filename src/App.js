@@ -23,13 +23,13 @@ function App() {
       <Stack.Navigator screenOptions={{
         headerShown:false
       }}>
-        <Stack.Screen name="register" component={Register} />
         <Stack.Screen name="home" component={Home} />
+        <Stack.Screen name="login" component={Login}  />
+        <Stack.Screen name="register" component={Register} />
         <Stack.Screen name="productslist" component={ProductsList} />
         <Stack.Screen name="cart" component={Cart} />
         <Stack.Screen name="product" component={Product} />
         <Stack.Screen name="profile" component={Profile} />
-        <Stack.Screen name="login" component={Login}  />
       </Stack.Navigator>
     </NavigationContainer>
         </Provider>

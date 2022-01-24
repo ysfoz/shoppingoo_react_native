@@ -23,10 +23,21 @@ export const counterSlice = createSlice({
       state.isFetching = false
       state.error = false;
     },
+    loginSuccess: (state, action) => {
+      state.isFetching = false;
+      state.currentUser = action.payload;
+      state.jwtToken = state.currentUser.jwtToken
+      
+    },
+    logoutSuccess:(state)=>{
+      state.error = false;
+      state.currentUser = null
+      state.jwtToken = null;
+    },
    
   },
 })
 
-export const { getUserFailure, getUserStart, registerSuccess } = counterSlice.actions
+export const { getUserFailure, getUserStart, registerSuccess,loginSuccess,logoutSuccess } = counterSlice.actions
 
 export default counterSlice.reducer

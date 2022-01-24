@@ -1,5 +1,5 @@
 import {SafeAreaView, StyleSheet, Text, View, ScrollView,Dimensions} from 'react-native';
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 
 import {
   Announcement,
@@ -12,19 +12,41 @@ import {
   Products
 } from '../components';
 
-const Home = () => {
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const Home = (props) => {
+
+  const [token,setToken] = useState(null)
+  console.log("🚀 ~ file: Home.js ~ line 20 ~ Home ~ token", token)
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@current_User')
+      if(value !== null) {
+        setToken(value)
+      }
+    } catch(e) {
+      console.log(e);
+    }
+  }
+ 
+  useEffect(()=>{
+    getData()
+  },[])
+  
+  
   return (
     <SafeAreaView>
       <ScrollView showsHorizontalScrollIndicator={false}>
         <Announcement />
-        <Navbar />
+        <Navbar navigate = {props.navigation.navigate}/>
         <SliderDesc />
         <Slider />
         <Categories />
         <View style={styles.container}>
           <Text style={styles.title}>Most Populer Products</Text>
         </View>
-        <Products/>
+        <Products homepage/>
         <Newsletter/>
         <Footer/>
 

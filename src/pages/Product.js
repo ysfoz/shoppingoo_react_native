@@ -15,10 +15,10 @@ import {Navbar, Announcement} from '../components';
 import {popularProducts} from '../data';
 import cart from '../assets/cart.png';
 
-const Product = () => {
+const Product = (props) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Navbar />
+      <Navbar navigate = {props.navigation.navigate}/>
       <Announcement />
       <View style={styles.upContainer}>
         <Image source={cart} style={styles.img} />
