@@ -10,10 +10,23 @@ export const counterSlice = createSlice({
     jwtToken:null
   },
   reducers: {
+    getUserStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+      
+    },
+    getUserFailure: (state, action) => {
+      state.isFetching = false;
+      state.error = true;
+    },
+    registerSuccess:(state) => {
+      state.isFetching = false
+      state.error = false;
+    },
    
   },
 })
 
-export const {  } = counterSlice.actions
+export const { getUserFailure, getUserStart, registerSuccess } = counterSlice.actions
 
 export default counterSlice.reducer
