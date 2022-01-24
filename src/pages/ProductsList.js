@@ -9,7 +9,7 @@ import {
   Footer,
   Products,
 } from '../components';
-import {popularProducts} from '../data';
+
 
 const ProductsList = (props) => {
   return (

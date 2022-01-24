@@ -11,19 +11,21 @@ import {
   Newsletter,
   Products
 } from '../components';
+import { setTokenRedux } from '../redux/userRedux';
+import { useDispatch } from 'react-redux';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = (props) => {
-
+  const dispatch = useDispatch()
   const [token,setToken] = useState(null)
-  console.log("🚀 ~ file: Home.js ~ line 20 ~ Home ~ token", token)
+  
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('@current_User')
       if(value !== null) {
-        setToken(value)
+        setToken(JSON.parse(value))
       }
     } catch(e) {
       console.log(e);
@@ -33,6 +35,10 @@ const Home = (props) => {
   useEffect(()=>{
     getData()
   },[])
+
+  useEffect(()=>{
+dispatch(setTokenRedux(token))
+  },[token])
   
   
   return (

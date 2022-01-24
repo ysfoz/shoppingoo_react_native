@@ -12,7 +12,7 @@ import { logout } from '../helper/requestMethods';
 const Navbar = (props) => {
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.user.currentUser)
-  console.log("🚀 ~ file: Navbar.js ~ line 15 ~ Navbar ~ token", currentUser)
+  
 
   const confirmLogout = () =>
     Alert.alert(
@@ -47,8 +47,8 @@ const Navbar = (props) => {
 
           { currentUser ?
           <>
-          <TouchableOpacity onPress={(confirmLogout)}>
-          <Image source={exit} style={[styles.logo,{resizeMode:"contain"}]} />
+          <TouchableOpacity onPress={(confirmLogout)} style={{justifyContent:"center"}}>
+          <Image source={exit} style={[styles.logo,{width:30,height:30,resizeMode:"contain"}]} />
           </TouchableOpacity>
           <TouchableOpacity onPress={()=> props.navigate("profile")}>
           <Image source={ currentUser?.img ? {uri:currentUser?.img} : profile} style={[styles.logo, {borderRadius: 20}]} />
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
   },
   right: {
     flexDirection: 'row',
+    marginRight:4
   },
   userContainer: {
     justifyContent:"space-between",

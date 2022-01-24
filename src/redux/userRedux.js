@@ -7,7 +7,7 @@ export const counterSlice = createSlice({
     currentUser: null,
     isFetching: false,
     error: false,
-    jwtToken:null
+    // jwtToken:null
   },
   reducers: {
     getUserStart: (state) => {
@@ -19,25 +19,40 @@ export const counterSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    setTokenRedux:(state,action)=>{
+      state.currentUser = action.payload;
+      // state.jwtToken = state.currentUser.jwtToken
+    },
     registerSuccess:(state) => {
       state.isFetching = false
       state.error = false;
     },
-    loginSuccess: (state, action) => {
+    loginSuccess: (state) => {
       state.isFetching = false;
-      state.currentUser = action.payload;
-      state.jwtToken = state.currentUser.jwtToken
+      // state.currentUser = action.payload;
+      // state.jwtToken = state.currentUser.jwtToken
       
     },
     logoutSuccess:(state)=>{
       state.error = false;
       state.currentUser = null
-      state.jwtToken = null;
+      // state.jwtToken = null;
     },
+    deleteSuccess:(state)=>{
+      state.error = false;
+      state.isFetching = false;
+      state.currentUser = null;
+      // state.jwtToken = null;
+    },
+    // updateSuccess:(state,action)=>{
+    //   state.error = false;
+    //   state.isFetching =false
+    //   state.currentUser = action.payload
+    // }
    
   },
 })
 
-export const { getUserFailure, getUserStart, registerSuccess,loginSuccess,logoutSuccess } = counterSlice.actions
+export const { getUserFailure, getUserStart, registerSuccess,loginSuccess,logoutSuccess,updateSuccess,deleteSuccess,setTokenRedux } = counterSlice.actions
 
 export default counterSlice.reducer

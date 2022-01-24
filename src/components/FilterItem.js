@@ -1,42 +1,46 @@
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 
-const FilterItem = (props) => {
+const FilterItem = props => {
   return (
-      <>
-   
-      
-          <TouchableOpacity style={props.width ? styles.filterButton  : [ styles.button,{backgroundColor:props.color && props.color} ]}>
-              <Text style={styles.sizeText}>{props.size}</Text>
-          </TouchableOpacity>
-          
-      
-      </>
+    <>
+      <TouchableOpacity
+        style={
+          props.width
+            ? styles.filterButton
+            : [styles.button, {backgroundColor: props.color && props.color}]
+        }>
+        <Text style={styles.sizeText}>{props.size}</Text>
+      </TouchableOpacity>
+    </>
   );
 };
 
-export  {FilterItem};
+export {FilterItem};
 
 const styles = StyleSheet.create({
-   
-    button:{
-        height: Dimensions.get("screen").width * 0.1,
-        width: Dimensions.get("screen").width * 0.1,
-        marginLeft:10,
-        alignItems:"center",
-        justifyContent:"center",
-        borderRadius:10,
-        borderWidth:1
-    },
-    filterButton:{
-        height: Dimensions.get("screen").width * 0.1,
-        width: Dimensions.get("screen").width * 0.25,
-        marginLeft:10,
-        alignItems:"center",
-        justifyContent:"center",
-        borderRadius:10,
-        borderWidth:1
-    },
-  
-  
+  button: {
+    height: Dimensions.get('screen').width * 0.1,
+    width: Dimensions.get('screen').width * 0.1,
+    marginLeft: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  filterButton: {
+    height: Dimensions.get('screen').width * 0.1,
+    width: Dimensions.get('screen').width * 0.25,
+    marginLeft: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    borderWidth: 1,
+  },
 });

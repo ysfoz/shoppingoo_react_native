@@ -6,18 +6,72 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { getUserStart, getUserFailure,setTokenRedux,deleteSuccess} from "../redux/userRedux"
 
 import {CostumInput} from '../components';
 import avatar from '../assets/avatar.jpeg';
 
-const Profile = () => {
+const Profile = props => {
   const dispatch = useDispatch();
-  const currentUser = useSelector(state => state.user.currentUser);
+  const currentUser = useSelector(state => state?.user?.currentUser);
+  console.log("🚀 ~ file: Profile.js ~ line 29 ~ currentUser", currentUser)
+
+  const confirmDelete = () =>
+    Alert.alert('Shoppingoo', 'Are you sure to delete', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('OK Pressed'),
+        style: 'cancel',
+      },
+      {
+        text: 'Delete',
+        onPress: () => {
+          deleteUser();
+          props.navigation.navigate('home');
+        },
+      },
+    ]);
+
+  const updateUser = async (values) => {
+    dispatch(getUserStart());
+    try {
+      const res = await axios.put(
+        `https://mern-e-commerce-api.herokuapp.com/api/users/${currentUser?._id}`,
+        values,
+        {headers: {token: `Bearer ${currentUser?.jwtToken}`}},
+      );
+      await AsyncStorage.setItem('@current_User',JSON.stringify(res.data));
+      dispatch(setTokenRedux(res?.data));
+      console.log(
+        '🚀 ~ file: requestMethods.js ~ line 78 ~ updateUser ~ res?.data',
+        res?.data,
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteUser = async () => {
+    dispatch(getUserStart());
+    try {
+      await axios.delete(`https://mern-e-commerce-api.herokuapp.com/api/users/${currentUser._id}`, {
+        headers: {token: `Bearer ${currentUser.jwtToken}`},
+      });
+      await AsyncStorage.removeItem('@current_User');
+      dispatch(deleteSuccess());
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -47,7 +101,7 @@ const Profile = () => {
         .min(6, 'Password is too short - should be 6 chars minimum.'),
     }),
     onSubmit: values => {
-      console.log(values);
+      updateUser(values);
     },
   });
 
@@ -67,11 +121,10 @@ const Profile = () => {
         text="Username"
         onChangeText={formik.handleChange('username')}
         onBlur={formik.handleBlur('username')}
-       
       />
-       {formik.touched.username && formik.errors.username ? (
-          <Text style={styles.error}>{formik.errors.username}</Text>
-        ) : null}
+      {formik.touched.username && formik.errors.username ? (
+        <Text style={styles.error}>{formik.errors.username}</Text>
+      ) : null}
       <CostumInput
         value={formik.values.fullname}
         placeholder="Full name"
@@ -80,9 +133,9 @@ const Profile = () => {
         onChangeText={formik.handleChange('fullname')}
         onBlur={formik.handleBlur('fullname')}
       />
-       {formik.touched.fullname && formik.errors.fullname ? (
-          <Text style={styles.error}>{formik.errors.fullname}</Text>
-        ) : null}
+      {formik.touched.fullname && formik.errors.fullname ? (
+        <Text style={styles.error}>{formik.errors.fullname}</Text>
+      ) : null}
       <CostumInput
         value={formik.values.email.toLowerCase()}
         placeholder="Email"
@@ -91,9 +144,9 @@ const Profile = () => {
         onChangeText={formik.handleChange('email')}
         onBlur={formik.handleBlur('email')}
       />
-       {formik.touched.email && formik.errors.email ? (
-          <Text style={styles.error}>{formik.errors.email}</Text>
-        ) : null}
+      {formik.touched.email && formik.errors.email ? (
+        <Text style={styles.error}>{formik.errors.email}</Text>
+      ) : null}
 
       <CostumInput
         value={formik.values.adress}
@@ -103,9 +156,9 @@ const Profile = () => {
         onChangeText={formik.handleChange('adress')}
         onBlur={formik.handleBlur('adress')}
       />
-       {formik.touched.adress && formik.errors.adress ? (
-          <Text style={styles.error}>{formik.errors.adress}</Text>
-        ) : null}
+      {formik.touched.adress && formik.errors.adress ? (
+        <Text style={styles.error}>{formik.errors.adress}</Text>
+      ) : null}
       <CostumInput
         value={formik.values.city}
         placeholder="city"
@@ -114,31 +167,31 @@ const Profile = () => {
         onChangeText={formik.handleChange('city')}
         onBlur={formik.handleBlur('city')}
       />
-       {formik.touched.city && formik.errors.city ? (
-          <Text style={styles.error}>{formik.errors.city}</Text>
-        ) : null}
+      {formik.touched.city && formik.errors.city ? (
+        <Text style={styles.error}>{formik.errors.city}</Text>
+      ) : null}
       <CostumInput
-        value={String(formik.values.postalcode)}
+        value={formik.values.postalcode}
         placeholder="Post Code"
         style={styles.input}
         text="Postal Code"
         onChangeText={formik.handleChange('postalcode')}
         onBlur={formik.handleBlur('postalcode')}
       />
-       {formik.touched.postalcode && formik.errors.postalcode ? (
-          <Text style={styles.error}>{formik.errors.postalcode}</Text>
-        ) : null}
+      {formik.touched.postalcode && formik.errors.postalcode ? (
+        <Text style={styles.error}>{formik.errors.postalcode}</Text>
+      ) : null}
       <CostumInput
-        value={String(formik.values.tel)}
+        value={formik.values.tel}
         placeholder="Phone"
         style={styles.input}
         text="Phone"
         onChangeText={formik.handleChange('tel')}
         onBlur={formik.handleBlur('tel')}
       />
-       {formik.touched.tel && formik.errors.tel ? (
-          <Text style={styles.error}>{formik.errors.tel}</Text>
-        ) : null}
+      {formik.touched.tel && formik.errors.tel ? (
+        <Text style={styles.error}>{formik.errors.tel}</Text>
+      ) : null}
       <CostumInput
         value={formik.values.password}
         placeholder="password"
@@ -148,16 +201,16 @@ const Profile = () => {
         onBlur={formik.handleBlur('password')}
         password
       />
-       {formik.touched.password && formik.errors.password ? (
-          <Text style={styles.error}>{formik.errors.password}</Text>
-        ) : null}
+      {formik.touched.password && formik.errors.password ? (
+        <Text style={styles.error}>{formik.errors.password}</Text>
+      ) : null}
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={[styles.button, {backgroundColor: '#29b6f6'}]}
           onPress={formik.handleSubmit}>
           <Text style={styles.buttonText}>Update</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={confirmDelete}>
           <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
       </View>
