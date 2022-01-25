@@ -5,7 +5,7 @@ import {popularProducts} from '../data';
 import {Product} from '.';
 import axios from 'axios';
 
-const Products = ({cat, sort, filters,homepage}) => {
+const Products = ({cat, sort, filters,homepage,navigate}) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -84,9 +84,9 @@ const Products = ({cat, sort, filters,homepage}) => {
         ? products
             .sort((a, b) => b.salesAmount - a.salesAmount)
             .slice(0, 8)
-            .map((item) => <Product item={item} key={item._id} />)
+            .map((item) => <Product item={item} key={item._id} navigate={navigate}/>)
         : filteredProducts.map((item) => (
-            <Product item={item} key={item._id} />
+            <Product item={item} key={item._id} navigate={navigate}/>
           ))}
     </View>
   );

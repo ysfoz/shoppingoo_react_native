@@ -52,7 +52,7 @@ dispatch(setTokenRedux(token))
         <View style={styles.container}>
           <Text style={styles.title}>Most Populer Products</Text>
         </View>
-        <Products homepage/>
+        <Products homepage navigate={props.navigation.navigate}/>
         <Newsletter/>
         <Footer/>
 

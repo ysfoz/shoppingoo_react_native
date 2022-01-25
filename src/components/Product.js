@@ -11,9 +11,9 @@ import React from 'react';
 const Product = props => {
   
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{backgroundColor:props.item.inSale ? "rgba(251,233,231,0.3)" :"#f5fbfd"}]}>
       <View style={styles.circle}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>props.navigate("product",{product:props.item})}>
           <Image source={{uri: props?.item?.img}} style={styles.img} />
         </TouchableOpacity>
       </View>

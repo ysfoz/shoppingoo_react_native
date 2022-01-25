@@ -1,65 +1,80 @@
 import {
   Dimensions,
   Image,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  SafeAreaView
+  SafeAreaView,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 
 import {Navbar, Announcement} from '../components';
 
-import {popularProducts} from '../data';
-import cart from '../assets/cart.png';
+const Product = props => {
+  const {product} = props.route.params;
+  const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState('');
+  const [color, setColor] = useState('');
 
-const Product = (props) => {
+  const handleQuantity = type => {
+    if (type === 'dec') {
+      quantity > 1 && setQuantity(prev => prev - 1);
+    } else {
+      setQuantity(prev => prev + 1);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <Navbar navigate = {props.navigation.navigate}/>
+      <Navbar navigate={props.navigation.navigate} />
       <Announcement />
       <View style={styles.upContainer}>
-        <Image source={cart} style={styles.img} />
+        <Image source={{uri: product?.img}} style={styles.img} />
       </View>
 
       <View style={styles.downContainer}>
         <View style={styles.namePreis}>
-          <Text style={styles.title}>product name</Text>
-          <Text style={styles.title}>$122</Text>
+          <Text style={styles.title}>{product?.title}</Text>
+          {product?.inSale ? (
+            <View style={styles.priceContainer}><Text style={[styles.title, {color:"crimson",textDecorationLine:"line-through",fontSize:16}]}>
+              ${Math.floor(product?.price + product?.price * 0.3)}
+            </Text>
+            <Text style={styles.title}>${product?.price}</Text>
+            </View>
+          ) : (
+            <Text style={styles.title}>${product?.price}</Text>
+          )}
         </View>
 
-        <Text style={styles.text}>product desc</Text>
+        <Text style={styles.text}>{product?.desc}</Text>
 
         <View style={styles.colorContainer}>
           <Text style={styles.title}>Color</Text>
-          <View style={styles.color}></View>
-          <View style={styles.color}></View>
-          <View style={styles.color}></View>
+          {product?.color.map((item, index) => (
+            <TouchableOpacity key={index} onPress={() => setColor(item)}>
+              <View style={[styles.color, {backgroundColor: item}]}></View>
+            </TouchableOpacity>
+          ))}
         </View>
         <View style={styles.colorContainer}>
           <Text style={styles.title}>Size</Text>
           <View style={styles.sizeContainer}>
-            <TouchableOpacity>
-              <Text style={styles.size}>S</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.size}>L</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.size}>XL</Text>
-            </TouchableOpacity>
+            {product?.size?.map((item, index) => (
+              <TouchableOpacity key={index} onPress={() => setSize(item)}>
+                <Text style={styles.size}>{item.toUpperCase()}</Text>
+              </TouchableOpacity>
+            ))}
           </View>
         </View>
         <View style={styles.quantityContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleQuantity('dec')}>
             <Text style={styles.quantityText}>-</Text>
           </TouchableOpacity>
           <View style={styles.quantityWrapper}>
-            <Text style={styles.quantityNumber}>3</Text>
+            <Text style={styles.quantityNumber}>{quantity}</Text>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleQuantity('inc')}>
             <Text style={styles.quantityText}>+</Text>
           </TouchableOpacity>
         </View>
@@ -90,7 +105,8 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   img: {
-    width: Dimensions.get('screen').width * 0.8,
+    height: Dimensions.get('screen').height * 0.3,
+    width: Dimensions.get('screen').width * 0.6,
     resizeMode: 'contain',
   },
   text: {
@@ -107,7 +123,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 30,
-    backgroundColor: 'yellow',
+    borderWidth: 0.5,
     margin: 5,
     marginHorizontal: 10,
   },
@@ -149,15 +165,18 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     fontWeight: 'bold',
   },
-  button:{
+  button: {
     width: 150,
-    justifyContent:"center",
-    alignItems:"center",
-    alignSelf:"flex-end",
-    marginRight:20,
-    marginVertical:20,
-    backgroundColor:"#80cbc4",
-    borderRadius:4
-    
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    marginRight: 20,
+    marginVertical: 20,
+    backgroundColor: '#80cbc4',
+    borderRadius: 4,
+  },
+  priceContainer:{
+    flexDirection:"row",
+    alignItems:"center"
   }
 });

@@ -46,7 +46,7 @@ const ProductsList = (props) => {
         <FilterItem size="Price(asc)" width value="asc" setSort={setSort}/>
         <FilterItem size="Price(desc)" width value="desc" setSort={setSort}/>
       </View>
-      <Products cat={cat} filters={filters} sort={sort}/>
+      <Products cat={cat} filters={filters} sort={sort} navigate={props.navigation.navigate}/>
       <Newsletter />
       <Footer />
     </ScrollView>
