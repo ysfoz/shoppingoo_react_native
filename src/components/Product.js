@@ -14,7 +14,7 @@ const Product = props => {
     <View style={styles.container}>
       <View style={styles.circle}>
         <TouchableOpacity>
-          <Image source={{uri: props?.product?.img}} style={styles.img} />
+          <Image source={{uri: props?.item?.img}} style={styles.img} />
         </TouchableOpacity>
       </View>
     </View>

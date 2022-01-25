@@ -15,8 +15,7 @@ const ProductsList = (props) => {
   const [cat,setCat] =useState( props?.route?.params?.cat === undefined ? "" : props?.route?.params?.cat)
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("newest");
-  console.log("🚀 ~ file: ProductsList.js ~ line 18 ~ ProductsList ~ sort", sort)
-  console.log("🚀 ~ file: ProductsList.js ~ line 17 ~ ProductsList ~ filters", filters)
+
   
  
   return (
